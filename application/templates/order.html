@@ -1,0 +1,61 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+  <h2 class="title">You have chosen the following products:</h2>
+  {% if not orders %}
+  <p>You have not chosen any products!</p>
+  {% else %}
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Product_id</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Label</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.r2["product_id"] }}</td>
+        <td>{{ order.r2["title"] }}</td>
+        <td>{{ order.r2["artist"] }}</td>
+        <td>{{ order.r2["label"] }}</td>
+        <td>${{ order.r2["price"] }}</td>
+        <td>{{ order.r1["quantity"] }}</td>
+        <td>
+          <form action="{{ url_for('order') }}" method="POST">
+            <input
+              type="hidden"
+              name="product_id"
+              value="{{ order.r2['product_id'] }}"
+            />
+            <input
+              type="hidden"
+              name="quantity"
+              value="{{ order.r1['quantity'] }}"
+            />
+            <button type="submit" name="todo" value="add" class="btn">+</button>
+            <button type="submit" name="todo" value="subtract" class="btn">
+              -
+            </button>
+            <button type="submit" name="todo" value="delete" class="btn">
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="6">&nbsp;</td>
+        <td>Total: ${{ subtotal|round(2) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <button class="checkout btn"><h1>Check Out</h1></button>
+  {% endif %}
+</div>
+{% endblock %}

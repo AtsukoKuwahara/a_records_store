@@ -1,0 +1,364 @@
+/* Global Styles */
+body {
+  background: url("../image/IMG_1194_land.jpg") center fixed;
+  background-size: cover;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Adjust the overlay color and opacity */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Titles */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Container for main content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Navigation Bar */
+.nav {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  z-index: 10;
+}
+
+.nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav .logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.nav .welcome {
+  font-size: 24px;
+  color: #ffcc00; /* Adjust the color to your preference */
+  margin: 0 10px 10px 0;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  margin: 0 10px;
+}
+
+.nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav ul li a:hover {
+  color: #ffcc00; /* Change to your desired hover color */
+}
+
+/* Form Styles */
+.form-container {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container p {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.show-hide {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.show-hide input[type="checkbox"] {
+  margin-right: 10px; /* Add space between checkbox and text */
+}
+
+.form-container input[type="submit"] {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: #555;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Add overlay to body */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: -1;
+}
+
+/* Product Table Styles */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #333;
+  color: white;
+}
+
+.product-table td img.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.product-table button {
+  background-color: #ffcc00;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 2px; /* Add margin between buttons */
+}
+
+.product-table button:hover {
+  background-color: #ffd700;
+}
+
+/* Order Page Styles */
+.order-title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.checkout {
+  background-color: #ffcc00;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.checkout:hover {
+  background-color: #ffd700;
+}
+
+/* Featured Product Styles */
+.featured-product {
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.featured-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.featured-details {
+  max-width: 600px;
+}
+
+.featured-details h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.featured-details p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.featured-message {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+/* Admin Page Styles */
+.admin-page .container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page .form-group {
+  margin-bottom: 15px;
+}
+
+.admin-page .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.admin-page .form-group select,
+.admin-page .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.admin-page .btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px auto;
+}
+
+.admin-page .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Coming Soon Product List Styles */
+.coming-soon-list {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon-product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.coming-soon-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.coming-soon-details h4 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.coming-soon-details p {
+  margin: 5px 0;
+}
+
+/* Flash Messages Styles */
+.flash-messages {
+  margin: 10px 0;
+}
+
+.flash-message {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

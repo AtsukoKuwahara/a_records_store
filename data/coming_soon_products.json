@@ -1,0 +1,24 @@
+[
+    {
+      "product_id": 6,
+      "title": "The Wall",
+      "artist": "Pink Floyd",
+      "label": "Harvest Records",
+      "price": 26.99
+    },
+    {
+      "product_id": 7,
+      "title": "Hotel California",
+      "artist": "Eagles",
+      "label": "Asylum Records",
+      "price": 23.99
+    },
+    {
+      "product_id": 8,
+      "title": "Led Zeppelin IV",
+      "artist": "Led Zeppelin",
+      "label": "Atlantic Records",
+      "price": 25.99
+    }
+  ]
+  

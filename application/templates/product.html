@@ -1,0 +1,44 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+  <h2 class="title">Product List</h2>
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Label</th>
+        <th>Price</th>
+        <th>Buy</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>
+          <img
+            src="{{ url_for('static', filename='image/placeholder.png') }}"
+            alt="Placeholder Image"
+            class="product-image"
+          />
+        </td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.artist }}</td>
+        <td>{{ product.label }}</td>
+        <td>${{ product.price }}</td>
+        <td>
+          <form action="{{ url_for('order') }}" method="POST">
+            <input
+              type="hidden"
+              name="product_id"
+              value="{{ product.product_id }}"
+            />
+            <button type="submit">Buy Now</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

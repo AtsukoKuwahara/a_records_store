@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title">Record of the Week</h2>
+  {% if featured_product %}
+  <div class="featured-product">
+    <img
+      src="{{ url_for('static', filename='image/abbey_road.jpg') }}"
+      alt="{{ featured_product.title }}"
+      class="featured-image"
+    />
+    <div class="featured-details">
+      <h3>{{ featured_product.title }}</h3>
+      <p><strong>Artist:</strong> {{ featured_product.artist }}</p>
+      <p><strong>Label:</strong> {{ featured_product.label }}</p>
+      <p><strong>Price:</strong> ${{ featured_product.price }}</p>
+    </div>
+    
+  </div>
+  <h3>👀 From owner A 👀 :</h2>
+  <div class="featured-message">
+      <p>{{ featured_product.message }}</p>
+    </div>
+  {% else %}
+  <p>No record selected for this week.</p>
+  {% endif %}
+  
+  <hr>
+  <h2 class="title">Coming soon...</h2>
+  <ul class="coming-soon-list">
+    {% for product in coming_soon_products %}
+    <li>
+      <div class="coming-soon-product">
+        <div class="coming-soon-details">
+          <h4>{{ product.title }}</h4>
+          <p><strong>Artist:</strong> {{ product.artist }}</p>
+          <p><strong>Label:</strong> {{ product.label }}</p>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %} 
+{% block content %}
+<div class="form-container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash-message {{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <h2 class="title">Login</h2>
+    <p>
+      {{ form.email.label }}<br />
+      {{ form.email(size=32) }} {% for error in form.email.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p class="password-field">
+      {{ form.password.label }}<br />
+      {{ form.password(size=32) }}
+      <label class="show-hide">
+        <input type="checkbox" onclick="togglePasswordVisibility('password')" />
+        Show/Hide
+      </label>
+      {% for error in form.password.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+</div>
+<script>
+  function togglePasswordVisibility(id) {
+    var x = document.getElementById(id);
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
+{% endblock %}

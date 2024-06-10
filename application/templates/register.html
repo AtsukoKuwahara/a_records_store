@@ -1,0 +1,62 @@
+{% extends "layout.html" %} {% block content %}
+<div class="form-container">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <h2 class="title">Register</h2>
+    <p>
+      {{ form.first_name.label }}<br />
+      {{ form.first_name(size=32) }} {% for error in form.first_name.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.last_name.label }}<br />
+      {{ form.last_name(size=32) }} {% for error in form.last_name.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.email.label }}<br />
+      {{ form.email(size=32) }} {% for error in form.email.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p class="password-field">
+      {{ form.password.label }}<br />
+      {{ form.password(size=32) }}
+      <label class="show-hide">
+        <input type="checkbox" onclick="togglePasswordVisibility('password')" />
+        Show/Hide
+      </label>
+      {% for error in form.password.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p class="password-field">
+      {{ form.password_confirm.label }}<br />
+      {{ form.password_confirm(size=32) }}
+      <label class="show-hide">
+        <input
+          type="checkbox"
+          onclick="togglePasswordVisibility('password_confirm')"
+        />
+        Show/Hide
+      </label>
+      {% for error in form.password_confirm.errors %}
+      <span class="error-message">{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+</div>
+<script>
+  function togglePasswordVisibility(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  }
+</script>
+{% endblock %}

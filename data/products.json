@@ -1,0 +1,37 @@
+[
+  {
+    "product_id": 1,
+    "title": "Abbey Road",
+    "artist": "The Beatles",
+    "label": "Apple Records",
+    "price": 29.99
+  },
+  {
+    "product_id": 2,
+    "title": "The Dark Side of the Moon",
+    "artist": "Pink Floyd",
+    "label": "Harvest Records",
+    "price": 24.99
+  },
+  {
+    "product_id": 3,
+    "title": "Rumours",
+    "artist": "Fleetwood Mac",
+    "label": "Warner Bros.",
+    "price": 19.99
+  },
+  {
+    "product_id": 4,
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "label": "Epic Records",
+    "price": 27.99
+  },
+  {
+    "product_id": 5,
+    "title": "Back in Black",
+    "artist": "AC/DC",
+    "label": "Atlantic Records",
+    "price": 22.99
+  }
+]
