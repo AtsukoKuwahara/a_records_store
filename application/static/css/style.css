@@ -24,7 +24,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px;;
 }
 
 /* Navigation Bar */
@@ -44,6 +44,12 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
+}
+
+.logo-container img {
+  max-height: 150px;
+  height: auto;
+  width: auto;
 }
 
 .nav .logo a {
@@ -85,6 +91,12 @@ body {
 
 .nav ul li a:hover {
   color: #ffcc00; /* Change to your desired hover color */
+}
+
+/* Content styling to ensure it sits between nav and footer */
+.content {
+  min-height: calc(100vh - 200px); /* Adjust based on nav and footer height */
+  padding: 20px 0;
 }
 
 /* Form Styles */
@@ -138,13 +150,87 @@ body {
   background-color: #555;
 }
 
+/* Checkout Form Section Styles */
+.form-section {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  max-width: 700px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group Styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button Styles */
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Review Table Styles */
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.review-table th,
+.review-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.review-table th {
+  background-color: #333;
+  color: white;
+}
+
+.review-table td {
+  background-color: #f9f9f9;
+}
+
+.review-table tfoot td {
+  background-color: #f3e3e4;
+  font-weight: bold;
+  text-align: end;
+}
+
 /* Footer Styles */
 .footer {
   background-color: #333;
   color: white;
   text-align: center;
   padding: 10px;
-  position: fixed;
   width: 100%;
   bottom: 0;
 }
@@ -187,6 +273,15 @@ body::before {
   opacity: 0.5;
 }
 
+.product-table .buy-column {
+  text-align: center;
+}
+
+.product-table .qty-column,
+.review-table .qty-column {
+  text-align: end;
+}
+
 .product-table button {
   background-color: #ffcc00;
   color: black;
@@ -194,7 +289,7 @@ body::before {
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
-  margin: 2px; /* Add margin between buttons */
+  margin: 2px;
 }
 
 .product-table button:hover {
@@ -267,7 +362,7 @@ body::before {
 
 /* Admin Page Styles */
 .admin-page .container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   max-width: 600px;
   margin: 50px auto;
@@ -291,17 +386,6 @@ body::before {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.admin-page .btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 10px auto;
 }
 
 .admin-page .btn:hover {
@@ -361,4 +445,19 @@ body::before {
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+.register-message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-message a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-message a:hover {
+  text-decoration: underline;
 }

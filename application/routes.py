@@ -5,6 +5,10 @@ from .forms import LoginForm, RegisterForm
 from flask_restx import Resource
 from .shoppingcart import shoppingcart
 import json
+import stripe
+
+# Initialize Stripe with secret key
+stripe.api_key = app.config['STRIPE_SECRET_KEY']
 
 # Utility function to load coming soon products from a JSON file
 def load_coming_soon_products():
@@ -234,3 +238,39 @@ def admin():
         return redirect(url_for('admin'))
 
     return render_template('admin.html', products=products)
+
+@app.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    """Handle the checkout process"""
+    if not session.get('username'):
+        flash('Please login first to proceed with checkout', 'error')
+        return redirect(url_for('login'))
+
+    user_id = session.get('user_id')
+    orders = shoppingcart(user_id)
+    subtotal = sum(item['r1']['quantity'] * item['r2']['price'] for item in orders)
+
+    if request.method == 'POST':
+        # Get form data
+        name = request.form.get('name')
+        address = request.form.get('address')
+        city = request.form.get('city')
+        province = request.form.get('province')
+        postal_code = request.form.get('postal_code')
+        payment_method = request.form.get('payment_method')
+
+        # Create a Stripe charge
+        try:
+            charge = stripe.Charge.create(
+                amount=int(subtotal * 100),  # Amount in cents
+                currency='ca',
+                description='A Records Store Purchase',
+                source=request.form['stripeToken']
+            )
+            flash('Your order has been placed successfully!', 'success')
+        except stripe.error.StripeError:
+            flash('There was an error processing your payment. Please try again.', 'error')
+        
+        return redirect(url_for('index'))
+    
+    return render_template('checkout.html', key=app.config['STRIPE_PUBLIC_KEY'], orders=orders, subtotal=subtotal)

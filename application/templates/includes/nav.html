@@ -1,29 +1,26 @@
 <nav class="nav">
-    <div class="container">
+  <div class="container">
       <div class="logo-container">
-        <img src="{{ url_for('static', filename='image/logo1.png') }}" alt="A's Records Logo" />
-        
+          <img src="{{ url_for('static', filename='image/logo1.png') }}" alt="A's Records Logo" />
       </div>
       <div class="right-container">
-        {% if session.get('username') %}
-        <span class="welcome">Welcome, {{ session['username'] }}</span>
-        {% endif %}
-        <ul>
-          <li><a href="{{ url_for('index') }}">Home</a></li>
-          {% if not session.get('username') %}
-          <li><a href="{{ url_for('register') }}">Register</a></li>
+          {% if session.get('username') %}
+          <span class="welcome">Welcome, {{ session['username'] }}</span>
           {% endif %}
-          <li><a href="{{ url_for('product') }}">Product List</a></li>
-          <li><a href="{{ url_for('order') }}">Shopping Cart</a></li>
-          {% if session.get('user_id') == 1 %}
-          <li><a href="{{ url_for('admin') }}">Admin</a></li>
-          {% endif %}
-          {% if not session.get('username') %}
-          <li><a href="{{ url_for('login') }}">Login</a></li>
-          {% else %}
-          <li><a href="{{ url_for('logout') }}">Logout</a></li>
-          {% endif %}
-        </ul>
+          <ul>
+              <li><a href="{{ url_for('index') }}">Home</a></li>
+              <li><a href="{{ url_for('product') }}">Product List</a></li>
+              <li><a href="{{ url_for('order') }}">Shopping Cart</a></li>
+              {% if not session.get('username') %}
+              <li><a href="{{ url_for('register') }}">Register</a></li>
+              <li><a href="{{ url_for('login') }}">Login</a></li>
+              {% else %}
+              <li><a href="{{ url_for('logout') }}">Logout</a></li>
+              {% if session.get('user_id') == 1 %}
+              <li><a href="{{ url_for('admin') }}">Admin</a></li>
+              {% endif %}
+              {% endif %}
+          </ul>
       </div>
-    </div>
+  </div>
 </nav>

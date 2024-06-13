@@ -12,7 +12,7 @@
         <th>Artist</th>
         <th>Label</th>
         <th>Price</th>
-        <th>Quantity</th>
+        <th>Qty</th>
         <th>Option</th>
       </tr>
     </thead>
@@ -24,7 +24,7 @@
         <td>{{ order.r2["artist"] }}</td>
         <td>{{ order.r2["label"] }}</td>
         <td>${{ order.r2["price"] }}</td>
-        <td>{{ order.r1["quantity"] }}</td>
+        <td class="qty-column">{{ order.r1["quantity"] }}</td>
         <td>
           <form action="{{ url_for('order') }}" method="POST">
             <input
@@ -55,7 +55,7 @@
     </tbody>
   </table>
   <br />
-  <button class="checkout btn"><h1>Check Out</h1></button>
+  <a href="{{ url_for('checkout') }}" class="btn checkout">Check Out</a>
   {% endif %}
 </div>
 {% endblock %}
