@@ -5,25 +5,41 @@ This project includes user registration, login, a product list, a shopping cart,
 
 ## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Routes](#routes)
-- [Models](#models)
-- [Forms](#forms)
-- [Static Files](#static-files)
-- [Templates](#templates)
-- [License](#license)
+- [A's Records Store](#as-records-store)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Project Structure](#project-structure)
+  - [Routes](#routes)
+  - [Models](#models)
+    - [User](#user)
+    - [Product](#product)
+    - [RecordOfTheWeek](#recordoftheweek)
+    - [Order](#order)
+  - [Forms](#forms)
+    - [LoginForm](#loginform)
+    - [RegisterForm](#registerform)
+    - [CheckoutForm](#checkoutform)
+  - [Static Files](#static-files)
+    - [CSS](#css)
+    - [Images](#images)
+    - [JavaScript](#javascript)
+  - [Templates](#templates)
+    - [Includes](#includes)
+    - [Pages](#pages)
+  - [License](#license)
 
 ## Features
 
 - User registration and login
 - User roles (admin and regular user)
 - Admin page to set the record of the week
+- Dynamic loading of images for records
 - Display of the record of the week with a custom message
 - Product listing with the ability to buy products
 - Shopping cart functionality
+- Checkout process integrated with Stripe for payment processing
 - Flash messages for feedback
 - Responsive design with a clean UI
 
@@ -68,6 +84,7 @@ This project includes user registration, login, a product list, a shopping cart,
     - Navigate to `/admin` to set the record of the week and add a message.
 4. **Browse Products**: View available products on the `/product` page.
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
+6. **Checkout**: Proceed to checkout from the `/checkout` page.
 
 ## Project Structure
 
@@ -93,8 +110,10 @@ a_records_store/
 │       │   ├── logo2.png
 │       │   ├── placeholder.png
 │       │   └── IMG_1194_land.jpg
+│       │   └── uploads/
+│       │       └── [uploaded_files_here]
 │       └── js/
-│           └── script.js
+│           └── checkout.js
 │   └── templates/
 │       ├── includes/
 │       │   ├── nav.html
@@ -105,6 +124,7 @@ a_records_store/
 │       ├── register.html
 │       ├── product.html
 │       ├── order.html
+│       ├── checkout.html
 │       └── layout.html
 └── data/
     ├── products.json
@@ -123,6 +143,8 @@ a_records_store/
 - **POST /order**: Manages the shopping cart and order process.
 - **GET /admin**: Admin page to set the record of the week.
 - **POST /admin**: Handles the update of the record of the week.
+- **GET /checkout**: Displays the checkout page.
+- **POST /checkout**: Handles the checkout process and integrates with Stripe for payment processing.
 
 ## Models
 
@@ -154,6 +176,7 @@ Represents the record of the week.
 - `product_id`: Identifier of the product selected as the record of the week.
 - `message`: Message from the admin about why this record was selected.
 - `created_at`: Timestamp when the record was created (defaults to the current time).
+- `image_url`: URL of the image associated with the record of the week.
 
 ### Order
 
@@ -185,6 +208,21 @@ Used for user registration.
 - `last_name`: Last name field with validation.
 - `submit`: Submit button.
 
+### CheckoutForm
+
+Used for the checkout process.
+
+- `name`: Name field.
+- `address`: Address field.
+- `city`: City field.
+- `province`: Province field.
+- `postal_code`: Postal code field.
+- `payment_method`: Payment method field.
+- `card_number`: Card number field (handled by Stripe).
+- `expiry_date`: Card expiry date field (handled by Stripe).
+- `cvc`: Card CVC field (handled by Stripe).
+- `submit`: Submit button.
+
 ## Static Files
 
 ### CSS
@@ -193,15 +231,15 @@ Used for user registration.
 
 ### Images
 
-- `abbey_road.jpg`: Sample image for the record of the week.
 - `logo1.png`: Logo image with text.
 - `logo2.png`: Logo image without text.
 - `placeholder.png`: Placeholder image for products.
 - `IMG_1194_land.jpg`: Background image.
+- `uploads/`: Folder containing uploaded images.
 
 ### JavaScript
 
-- `script.js`: Contains JavaScript functions for the application.
+- `checkout.js`: Contains JavaScript functions for the checkout process.
 
 ## Templates
 
@@ -218,6 +256,7 @@ Used for user registration.
 - `register.html`: Registration page.
 - `product.html`: Product listing page.
 - `order.html`: Shopping cart and order page.
+- `checkout.html`: Checkout page.
 - `layout.html`: Base layout for the application.
 
 ## License
