@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container admin-page">
     <h2 class="title">Admin - Set Record of the Week</h2>
-    <form method="POST" action="{{ url_for('admin') }}">
+    <form method="POST" action="{{ url_for('admin') }}" enctype="multipart/form-data">
         <div class="form-group">
             <label for="product_id">Select Record of the Week:</label>
             <select name="product_id" id="product_id" required>
@@ -18,15 +18,19 @@
             <label for="message">Message:</label>
             <textarea name="message" id="message" rows="4" required></textarea>
         </div>
+        <div class="form-group">
+            <label for="image">Upload Image:</label>
+            <input type="file" name="image" id="image" accept="image/*">
+        </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-    <ul class="flashes">
+    <div class="flash-messages">
         {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
+        <div class="flash-message {{ category }}">{{ message }}</div>
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
     {% endwith %}
 </div>

@@ -5,23 +5,30 @@
   <h2 class="title">Record of the Week</h2>
   {% if featured_product %}
   <div class="featured-product">
+    {% if featured_product.image_url %}
     <img
-      src="{{ url_for('static', filename='image/abbey_road.jpg') }}"
+      src="{{ featured_product.image_url }}"
       alt="{{ featured_product.title }}"
       class="featured-image"
     />
+    {% else %}
+    <img
+      src="{{ url_for('static', filename='image/placeholder.png') }}"
+      alt="{{ featured_product.title }}"
+      class="featured-image"
+    />
+    {% endif %}
     <div class="featured-details">
       <h3>{{ featured_product.title }}</h3>
       <p><strong>Artist:</strong> {{ featured_product.artist }}</p>
       <p><strong>Label:</strong> {{ featured_product.label }}</p>
       <p><strong>Price:</strong> ${{ featured_product.price }}</p>
     </div>
-    
   </div>
-  <h3>👀 From owner A 👀 :</h2>
+  <h3>👀 From owner A 👀 :</h3>
   <div class="featured-message">
       <p>{{ featured_product.message }}</p>
-    </div>
+  </div>
   {% else %}
   <p>No record selected for this week.</p>
   {% endif %}

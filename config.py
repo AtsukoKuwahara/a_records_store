@@ -15,5 +15,8 @@ class Config(object):
         'port': 27017                # Port where MongoDB is running
     }
 
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'image', 'uploads')
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max file size: 16MB
+
 # Print the secret key for verification during development
 print("SECRET_KEY:", Config.SECRET_KEY)

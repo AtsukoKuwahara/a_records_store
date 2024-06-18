@@ -1,3 +1,6 @@
+import os
+from werkzeug.utils import secure_filename
+
 from flask import render_template, redirect, url_for, jsonify, request, session, flash
 from .model import Product, User, Order, RecordOfTheWeek
 from . import app, api
@@ -6,6 +9,18 @@ from flask_restx import Resource
 from .shoppingcart import shoppingcart
 import json
 import stripe
+import datetime
+
+# Define allowed extensions for file uploads
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Ensure the upload folder exists
+UPLOAD_FOLDER = 'application/static/image/uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize Stripe with secret key
 stripe.api_key = app.config['STRIPE_SECRET_KEY']
@@ -97,9 +112,7 @@ class ProductGetUpdateDelete(Resource):
 @app.route('/')
 @app.route('/index')
 def index():
-    """
-    Render the index page with the featured product and coming soon products.
-    """
+    """Render the index page with the featured product and coming soon products"""
     # Fetch the most recent record of the week
     featured_product_entry = RecordOfTheWeek.objects.order_by('-created_at').first()
     featured_product = None
@@ -107,6 +120,7 @@ def index():
         featured_product = Product.objects(product_id=featured_product_entry.product_id).first()
         if featured_product:
             featured_product.message = featured_product_entry.message
+            featured_product.image_url = featured_product_entry.image_url
 
     coming_soon_products = load_coming_soon_products()
     return render_template('index.html', featured_product=featured_product, coming_soon_products=coming_soon_products)
@@ -210,9 +224,7 @@ def logout():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    """
-    Render the admin page and handle setting the record of the week.
-    """
+    """Render the admin page and handle setting the record of the week"""
     if not session.get('username') or session.get('user_id') != 1:
         return redirect(url_for('index'))
 
@@ -220,21 +232,30 @@ def admin():
     if request.method == 'POST':
         product_id = request.form.get('product_id')
         message = request.form.get('message')
+        image_url = None
 
-        # Get the selected product
-        selected_product = Product.objects(product_id=product_id).first()
+        if 'image' in request.files:
+            image = request.files['image']
+            if image and allowed_file(image.filename):
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                image_url = url_for('static', filename=f'image/uploads/{filename}', _external=True)
 
-        if selected_product:
-            # Save the record of the week
+        # Update existing record if it exists
+        record_of_the_week = RecordOfTheWeek.objects(product_id=product_id).first()
+        if record_of_the_week:
+            record_of_the_week.update(message=message, image_url=image_url, created_at=datetime.datetime.utcnow())
+        else:
+            # Create new record
             record_of_the_week = RecordOfTheWeek(
-                product_id=selected_product.product_id,
-                message=message
+                product_id=product_id,
+                message=message,
+                image_url=image_url,
+                created_at=datetime.datetime.utcnow()
             )
             record_of_the_week.save()
-            flash("Record of the Week updated successfully!", "success")
-        else:
-            flash("Invalid product selection.", "error")
 
+        flash("Record of the Week updated successfully!", "success")
         return redirect(url_for('admin'))
 
     return render_template('admin.html', products=products)
