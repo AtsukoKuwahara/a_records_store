@@ -34,7 +34,7 @@ class Product(db.Document):
 
 class RecordOfTheWeek(db.Document):
     product_id  =   db.IntField()
-    message     =   db.StringField( max_length=500 )
+    message     =   db.StringField( max_length=2000 )
     created_at  =   db.DateTimeField(default=datetime.datetime.utcnow)
     image_url   =   db.StringField()  # URL of the uploaded image
 

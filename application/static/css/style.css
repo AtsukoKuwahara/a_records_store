@@ -24,6 +24,11 @@ body::before {
   z-index: -1;
 }
 
+h3 {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
 /* Titles */
 .title {
   font-size: 24px;
@@ -351,6 +356,7 @@ body::before {
 }
 
 .featured-message {
+  white-space: pre-wrap;
   margin-top: 20px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.8);

@@ -25,9 +25,9 @@
       <p><strong>Price:</strong> ${{ featured_product.price }}</p>
     </div>
   </div>
-  <h3>👀 From owner A 👀 :</h3>
+  <h3>🌟 A's Spotlight 🌟</h3>
   <div class="featured-message">
-      <p>{{ featured_product.message }}</p>
+      {{ featured_product.message | safe }}
   </div>
   {% else %}
   <p>No record selected for this week.</p>
