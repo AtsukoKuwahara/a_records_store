@@ -1,24 +1,37 @@
 [
-    {
-      "product_id": 6,
-      "title": "The Wall",
-      "artist": "Pink Floyd",
-      "label": "Harvest Records",
-      "price": 26.99
-    },
-    {
-      "product_id": 7,
-      "title": "Hotel California",
-      "artist": "Eagles",
-      "label": "Asylum Records",
-      "price": 23.99
-    },
-    {
-      "product_id": 8,
-      "title": "Led Zeppelin IV",
-      "artist": "Led Zeppelin",
-      "label": "Atlantic Records",
-      "price": 25.99
-    }
-  ]
-  
+  {
+    "product_id": 9,
+    "title": "The Kinks Are the Village Green Preservation Society",
+    "artist": "The Kinks",
+    "label": "Pye Records",
+    "price": 21.99
+  },
+  {
+    "product_id": 10,
+    "title": "Pet Sounds",
+    "artist": "The Beach Boys",
+    "label": "Capitol Records",
+    "price": 24.99
+  },
+  {
+    "product_id": 11,
+    "title": "Electric Warrior",
+    "artist": "T. Rex",
+    "label": "Reprise Records",
+    "price": 22.99
+  },
+  {
+    "product_id": 12,
+    "title": "A Night at the Opera",
+    "artist": "Queen",
+    "label": "EMI Records",
+    "price": 27.99
+  },
+  {
+    "product_id": 13,
+    "title": "Parallel Lines",
+    "artist": "Blondie",
+    "label": "Chrysalis Records",
+    "price": 20.99
+  }
+]

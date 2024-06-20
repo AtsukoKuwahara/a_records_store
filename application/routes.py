@@ -260,6 +260,74 @@ def admin():
 
     return render_template('admin.html', products=products)
 
+@app.route('/admin/manage_products', methods=['GET', 'POST'])
+def manage_products():
+    """Render the admin page and handle product management"""
+    if not session.get('username') or session.get('user_id') != 1:
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
+        action = request.form.get('action')
+        product_id = request.form.get('product_id')
+
+        if action == 'add':
+            title = request.form.get('title')
+            artist = request.form.get('artist')
+            label = request.form.get('label')
+            price = request.form.get('price')
+            image_url = None
+
+            if 'image' in request.files:
+                image = request.files['image']
+                if image and allowed_file(image.filename):
+                    filename = secure_filename(image.filename)
+                    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    image_url = url_for('static', filename=f'image/uploads/{filename}', _external=True)
+
+            new_product = Product(
+                product_id=Product.objects.count() + 1,
+                title=title,
+                artist=artist,
+                label=label,
+                price=float(price),
+                image_url=image_url
+            )
+            new_product.save()
+            flash('Product added successfully!', 'success')
+
+        elif action == 'update':
+            product = Product.objects(product_id=product_id).first()
+            if product:
+                product.update(
+                    title=request.form.get('title'),
+                    artist=request.form.get('artist'),
+                    label=request.form.get('label'),
+                    price=float(request.form.get('price')),
+                )
+                if 'image' in request.files:
+                    image = request.files['image']
+                    if image and allowed_file(image.filename):
+                        filename = secure_filename(image.filename)
+                        image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                        image_url = url_for('static', filename=f'uploads/{filename}', _external=True)
+                        product.update(image_url=image_url)
+                flash('Product updated successfully!', 'success')
+            else:
+                flash('Product not found!', 'error')
+
+        elif action == 'delete':
+            product = Product.objects(product_id=product_id).first()
+            if product:
+                product.delete()
+                flash('Product deleted successfully!', 'success')
+            else:
+                flash('Product not found!', 'error')
+
+        return redirect(url_for('manage_products'))
+
+    products = Product.objects.all()
+    return render_template('manage_products.html', products=products)
+
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     """Handle the checkout process"""

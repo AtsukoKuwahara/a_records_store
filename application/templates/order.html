@@ -37,13 +37,9 @@
               name="quantity"
               value="{{ order.r1['quantity'] }}"
             />
-            <button type="submit" name="todo" value="add" class="btn">+</button>
-            <button type="submit" name="todo" value="subtract" class="btn">
-              -
-            </button>
-            <button type="submit" name="todo" value="delete" class="btn">
-              Delete
-            </button>
+            <button type="submit" name="todo" value="add" class="btn btn-table">+</button>
+            <button type="submit" name="todo" value="subtract" class="btn btn-table">-</button>
+            <button type="submit" name="todo" value="delete" class="btn btn-danger"><i class="fa fa-trash"></i></button>
           </form>
         </td>
       </tr>
@@ -55,7 +51,7 @@
     </tbody>
   </table>
   <br />
-  <a href="{{ url_for('checkout') }}" class="btn checkout">Check Out</a>
+  <a href="{{ url_for('checkout') }}" class="btn">Check Out</a>
   {% endif %}
 </div>
 {% endblock %}

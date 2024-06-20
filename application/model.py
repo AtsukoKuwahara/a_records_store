@@ -31,6 +31,7 @@ class Product(db.Document):
     artist      =   db.StringField( max_length=50 )
     label       =   db.StringField( max_length=50 )
     price       =   db.FloatField( )
+    image_url   =   db.StringField(default='static/image/placeholder.png')  # Default image URL
 
 class RecordOfTheWeek(db.Document):
     product_id  =   db.IntField()
