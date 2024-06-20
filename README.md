@@ -72,7 +72,20 @@ This project includes user registration, login, a product list, a shopping cart,
     pip install -r requirements.txt
     ```
 
-4. **Set environment variables**:
+4. **Install MongoDB**:
+    ```sh
+    brew tap mongodb/brew
+    brew install mongodb-community@5.0
+    ```
+
+    - Start MongoDB:
+    ```sh
+    brew services start mongodb-community@5.0
+    ```
+
+    - Create Database and Collections: Use MongoDB Compass or the MongoDB shell to create a new database named `a_records_store_db` and collections named `product`. (`user`, `order`, and `record_of_the_week` will be automatically created by operations on the webpage.)
+
+5. **Set environment variables**:
     Create a `.flaskenv` file in the root directory with the following content:
     ```
     FLASK_ENV=development
@@ -82,7 +95,7 @@ This project includes user registration, login, a product list, a shopping cart,
     STRIPE_SECRET_KEY='your_stripe_secret_key'
     ```
 
-5. **Run the application**:
+6. **Run the application**:
     ```sh
     flask run
     ```
