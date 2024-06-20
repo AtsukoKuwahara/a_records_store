@@ -29,6 +29,7 @@ This project includes user registration, login, a product list, a shopping cart,
     - [Includes](#includes)
     - [Pages](#pages)
   - [License](#license)
+  - [Original Images](#original-images)
   - [Screenshots](#screenshots)
     - [Homepage / Record of the Week](#homepage--record-of-the-week)
     - [Admin - Set Record of the Week](#admin---set-record-of-the-week)
@@ -292,6 +293,10 @@ Used for the checkout process.
 ## License
 
 This project is licensed under the MIT License.
+
+## Original Images
+
+The images logo1.png, logo2.png, and IMG_1194_land.jpeg are original works by the project owner and are included in this repository with permission.
 
 ## Screenshots
 
