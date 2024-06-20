@@ -29,6 +29,15 @@ This project includes user registration, login, a product list, a shopping cart,
     - [Includes](#includes)
     - [Pages](#pages)
   - [License](#license)
+  - [Screenshots](#screenshots)
+    - [Homepage / Record of the Week](#homepage--record-of-the-week)
+    - [Admin - Set Record of the Week](#admin---set-record-of-the-week)
+    - [Admin - Manage Products](#admin---manage-products)
+    - [Product List](#product-list)
+    - [Shopping Cart](#shopping-cart)
+    - [Checkout](#checkout)
+    - [MongoDB Compass - a\_records\_store\_db](#mongodb-compass---a_records_store_db)
+    - [MongoDB Compass - Products Collection](#mongodb-compass---products-collection)
 
 ## Features
 
@@ -268,3 +277,29 @@ Used for the checkout process.
 ## License
 
 This project is licensed under the MIT License.
+
+## Screenshots
+
+### Homepage / Record of the Week
+![Homepage](static/image/screenshots/homepage.jpeg)
+
+### Admin - Set Record of the Week
+![Admin - Set Record of the Week](static/image/screenshots/admin_set_record_of_the_week.jpeg)
+
+### Admin - Manage Products
+![Admin - Manage Products](static/image/screenshots/admin_manage_products.jpeg)
+
+### Product List
+![Product List](static/image/screenshots/product_list.jpeg)
+
+### Shopping Cart
+![Shopping Cart](static/image/screenshots/shopping_cart.jpeg)
+
+### Checkout
+![Checkout](static/image/screenshots/checkout.jpeg)
+
+### MongoDB Compass - a_records_store_db
+![MongoDB Compass - Products Collection](static/image/screenshots/mongodb_compass.jpeg)
+
+### MongoDB Compass - Products Collection
+![MongoDB Compass - Orders Collection](static/image/screenshots/mongodb_compass_products.jpeg)
