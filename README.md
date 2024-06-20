@@ -35,6 +35,7 @@ This project includes user registration, login, a product list, a shopping cart,
 - User registration and login
 - User roles (admin and regular user)
 - Admin page to set the record of the week
+- Admin page to manage products (add, update, delete)
 - Dynamic loading of images for records
 - Display of the record of the week with a custom message
 - Product listing with the ability to buy products
@@ -82,6 +83,7 @@ This project includes user registration, login, a product list, a shopping cart,
 3. **Admin Actions**:
     - Only the user with `user_id` 1 is an admin by default.
     - Navigate to `/admin` to set the record of the week and add a message.
+    - Navigate to `/admin/manage_products` to add, update, or delete products.
 4. **Browse Products**: View available products on the `/product` page.
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
 6. **Checkout**: Proceed to checkout from the `/checkout` page.
@@ -105,7 +107,6 @@ a_records_store/
 │       ├── css/
 │       │   └── style.css
 │       ├── image/
-│       │   ├── abbey_road.jpg
 │       │   ├── logo1.png
 │       │   ├── logo2.png
 │       │   ├── placeholder.png
@@ -119,6 +120,7 @@ a_records_store/
 │       │   ├── nav.html
 │       │   └── footer.html
 │       ├── admin.html
+│       ├── manage_products.html
 │       ├── index.html
 │       ├── login.html
 │       ├── register.html
@@ -143,6 +145,8 @@ a_records_store/
 - **POST /order**: Manages the shopping cart and order process.
 - **GET /admin**: Admin page to set the record of the week.
 - **POST /admin**: Handles the update of the record of the week.
+- **GET /admin/manage_products**: Admin page to manage products.
+- **POST /admin/manage_products**: Handles the addition, update, and deletion of products.
 - **GET /checkout**: Displays the checkout page.
 - **POST /checkout**: Handles the checkout process and integrates with Stripe for payment processing.
 
@@ -168,6 +172,7 @@ Represents a product in the store.
 - `artist`: Artist of the product.
 - `label`: Label of the product.
 - `price`: Price of the product.
+- `image_url`: URL of the product image.
 
 ### RecordOfTheWeek
 
@@ -251,6 +256,7 @@ Used for the checkout process.
 ### Pages
 
 - `admin.html`: Admin page to set the record of the week.
+- `manage_products.html`: Admin page to manage products.
 - `index.html`: Homepage displaying the record of the week and coming soon products.
 - `login.html`: Login page.
 - `register.html`: Registration page.
