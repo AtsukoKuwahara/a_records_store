@@ -281,25 +281,25 @@ This project is licensed under the MIT License.
 ## Screenshots
 
 ### Homepage / Record of the Week
-![Homepage](static/image/screenshots/homepage.jpeg)
+![Homepage](./application/static/image/screenshots/homepage.jpg)
 
 ### Admin - Set Record of the Week
-![Admin - Set Record of the Week](static/image/screenshots/admin_set_record_of_the_week.jpeg)
+![Admin - Set Record of the Week](./application/static/image/screenshots/admin_set_record_of_the_week.jpeg)
 
 ### Admin - Manage Products
-![Admin - Manage Products](static/image/screenshots/admin_manage_products.jpeg)
+![Admin - Manage Products](./application/static/image/screenshots/admin_manage_products.jpeg)
 
 ### Product List
-![Product List](static/image/screenshots/product_list.jpeg)
+![Product List](./application/static/image/screenshots/product_list.jpeg)
 
 ### Shopping Cart
-![Shopping Cart](static/image/screenshots/shopping_cart.jpeg)
+![Shopping Cart](./application/static/image/screenshots/shopping_cart.jpeg)
 
 ### Checkout
-![Checkout](static/image/screenshots/checkout.jpeg)
+![Checkout](./application/static/image/screenshots/checkout.jpeg)
 
 ### MongoDB Compass - a_records_store_db
-![MongoDB Compass - Products Collection](static/image/screenshots/mongodb_compass.jpeg)
+![MongoDB Compass - Products Collection](./application/static/image/screenshots/mongodb_compass.jpeg)
 
 ### MongoDB Compass - Products Collection
-![MongoDB Compass - Orders Collection](static/image/screenshots/mongodb_compass_products.jpeg)
+![MongoDB Compass - Orders Collection](./application/static/image/screenshots/mongodb_compass_products.jpeg)
