@@ -94,6 +94,7 @@ venv.bak/
 dmypy.json
 
 # Flask
+.flaskenv
 instance/
 .webassets-cache
 

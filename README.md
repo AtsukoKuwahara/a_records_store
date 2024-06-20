@@ -78,6 +78,8 @@ This project includes user registration, login, a product list, a shopping cart,
     FLASK_ENV=development
     FLASK_APP=main.py
     SECRET_KEY='a_secure_and_long_random_string'
+    STRIPE_PUBLIC_KEY='your_stripe_public_key'
+    STRIPE_SECRET_KEY='your_stripe_secret_key'
     ```
 
 5. **Run the application**:
