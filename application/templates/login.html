@@ -22,10 +22,7 @@
     <p class="password-field">
       {{ form.password.label }}<br />
       {{ form.password(size=32) }}
-      <label class="show-hide">
-        <input type="checkbox" onclick="togglePasswordVisibility('password')" />
-        Show/Hide
-      </label>
+      <button type="button" class="show-hide" onclick="togglePasswordVisibility('password')">Show</button>
       {% for error in form.password.errors %}
       <span class="error-message">{{ error }}</span>
       {% endfor %}
@@ -36,12 +33,18 @@
 </div>
 <script>
   function togglePasswordVisibility(id) {
-    var x = document.getElementById(id);
-    if (x.type === "password") {
-      x.type = "text";
+    var passwordField = document.getElementById(id);
+    var showHideButton = document.querySelector('.show-hide');
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      showHideButton.textContent = "Hide";
+      showHideButton.style.color = "blue";
     } else {
-      x.type = "password";
+      passwordField.type = "password";
+      showHideButton.textContent = "Show";
+      showHideButton.style.color = "black";
     }
+    passwordField.focus();
   }
 </script>
 {% endblock %}

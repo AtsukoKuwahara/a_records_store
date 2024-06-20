@@ -31,7 +31,7 @@
     </form>
     <br>
     <hr>
-    <h3>Update or Delete Existing Products</h3>
+    <h3>Update / Delete Existing Products</h3>
     <table class="product-table">
         <thead>
             <tr>
@@ -54,6 +54,7 @@
                     <td><input type="number" step="1" name="price" value="{{ product.price }}" required></td>
                     <td>
                         <button type="submit" class="btn btn-secondary">Update</button>
+                        <div class="separator"></div>
                     
                 </form>
                 <form method="POST" action="{{ url_for('manage_products') }}" style="display:inline;" onsubmit="return confirmDelete();">

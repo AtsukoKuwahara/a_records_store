@@ -1,8 +1,10 @@
 <nav class="nav">
   <div class="container">
-      <div class="logo-container">
-          <img src="{{ url_for('static', filename='image/logo1.png') }}" alt="A's Records Logo" />
-      </div>
+    <div class="logo-container">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='image/logo1.png') }}" alt="A's Records Logo" />
+        </a>
+    </div>
       <div class="right-container">
           {% if session.get('username') %}
           <span class="welcome">Welcome, {{ session['username'] }}</span>
