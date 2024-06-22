@@ -33,6 +33,10 @@ class Product(db.Document):
     price       =   db.FloatField( )
     image_url   =   db.StringField(default='static/image/placeholder.png')  # Default image URL
 
+    def save(self, *args, **kwargs):
+        self.price = round(float(self.price), 2)
+        return super(Product, self).save(*args, **kwargs)
+
 class RecordOfTheWeek(db.Document):
     product_id  =   db.IntField()
     message     =   db.StringField( max_length=2000 )

@@ -29,12 +29,26 @@
         </div>
         <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        {% if category == 'add-success' or category == 'add-error' %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    
     <br>
     <hr>
     <h3>Update / Delete Existing Products</h3>
     <table class="product-table">
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Label</th>
@@ -48,10 +62,23 @@
                 <form method="POST" action="{{ url_for('manage_products') }}" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    <td>
+                        {% if product.image_url == 'static/image/placeholder.png' %}
+                        <label for="image-{{ product.product_id }}" class="upload-icon">
+                            <i class="fa fa-upload"></i>
+                        </label>
+                        <input type="file" name="image" id="image-{{ product.product_id }}" class="file-input" accept="image/*" onchange="showFileName(this, 'file-name-{{ product.product_id }}')">
+                        <div class="file-name" id="file-name-{{ product.product_id }}"></div>
+                        {% else %}
+                        <img src="{{ product.image_url }}" alt="{{ product.title }}" class="product-image">
+                        <input type="file" name="image" class="file-input" accept="image/*" onchange="showFileName(this, 'file-name-{{ product.product_id }}')">
+                        <div class="file-name" id="file-name-{{ product.product_id }}"></div>
+                        {% endif %}
+                    </td>
                     <td><input type="text" name="title" value="{{ product.title }}" required></td>
                     <td><input type="text" name="artist" value="{{ product.artist }}" required></td>
                     <td><input type="text" name="label" value="{{ product.label }}" required></td>
-                    <td><input type="number" step="1" name="price" value="{{ product.price }}" required></td>
+                    <td><input type="number" step="0.01" name="price" value="{{ "%.2f"|format(product.price) }}" required></td>
                     <td>
                         <button type="submit" class="btn btn-secondary">Update</button>
                         <div class="separator"></div>
@@ -82,6 +109,11 @@
 <script>
   function confirmDelete() {
     return confirm("Are you sure you want to delete this product?");
+  }
+
+  function showFileName(input, elementId) {
+    var fileName = input.files[0].name;
+    document.getElementById(elementId).innerText = fileName;
   }
 </script>
 {% endblock %}

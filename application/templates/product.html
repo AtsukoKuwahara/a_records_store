@@ -17,15 +17,15 @@
       <tr>
         <td>
           <img
-            src="{{ url_for('static', filename='image/placeholder.png') }}"
-            alt="Placeholder Image"
+            src="{{ product.image_url }}"
+            alt="{{ product.title }}"
             class="product-image"
           />
         </td>
         <td>{{ product.title }}</td>
         <td>{{ product.artist }}</td>
         <td>{{ product.label }}</td>
-        <td class="price-column">${{ product.price }}</td>
+        <td class="price-column">${{ "%.2f"|format(product.price) }}</td>
         <td class="buy-column">
           <form action="{{ url_for('order') }}" method="POST">
             <input

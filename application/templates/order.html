@@ -11,7 +11,7 @@
         <th>Title</th>
         <th>Artist</th>
         <th>Label</th>
-        <th class="price-column">Price</th>
+        <th>Price</th>
         <th>Qty</th>
         <th>Option</th>
       </tr>
@@ -23,7 +23,7 @@
         <td>{{ order.r2["title"] }}</td>
         <td>{{ order.r2["artist"] }}</td>
         <td>{{ order.r2["label"] }}</td>
-        <td class="price-column">${{ order.r2["price"] }}</td>
+        <td class="price-column">${{ "%.2f"|format(order.r2["price"]) }}</td>
         <td class="qty-column">{{ order.r1["quantity"] }}</td>
         <td>
           <form action="{{ url_for('order') }}" method="POST">

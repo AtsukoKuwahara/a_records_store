@@ -331,7 +331,6 @@ h3 {
   width: 50px;
   height: 50px;
   object-fit: cover;
-  opacity: 0.5;
 }
 
 .product-table .buy-column {
@@ -464,6 +463,31 @@ td.id-column {
   width: 150px;
 }
 
+.upload-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  margin-top: 5px;
+}
+
 /* Coming Soon Product List Styles */
 .coming-soon-list {
   display: flex;
@@ -503,13 +527,15 @@ td.id-column {
   margin-bottom: 10px;
 }
 
-.flash-message.success {
+.flash-message.success,
+.flash-message.add-success {
   background-color: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
 }
 
-.flash-message.error {
+.flash-message.error,
+.flash-message.add-error {
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;

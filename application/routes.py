@@ -86,7 +86,8 @@ class ProductGetAndPost(Resource):
             title=data['title'],
             artist=data['artist'],
             label=data['label'],
-            price=data['price']
+            price=data['price'],
+            image_url=data.get('image_url', 'static/image/placeholder.png')  # Default image URL
         )
         product.save()
         return jsonify(Product.objects(product_id=data['product_id']))
@@ -293,7 +294,7 @@ def manage_products():
                 image_url=image_url
             )
             new_product.save()
-            flash('Product added successfully!', 'success')
+            flash('Product added successfully!', 'add-success')
 
         elif action == 'update':
             product = Product.objects(product_id=product_id).first()
@@ -309,7 +310,7 @@ def manage_products():
                     if image and allowed_file(image.filename):
                         filename = secure_filename(image.filename)
                         image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                        image_url = url_for('static', filename=f'uploads/{filename}', _external=True)
+                        image_url = url_for('static', filename=f'image/uploads/{filename}', _external=True)
                         product.update(image_url=image_url)
                 flash('Product updated successfully!', 'success')
             else:

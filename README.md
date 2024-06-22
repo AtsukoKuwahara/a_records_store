@@ -113,6 +113,8 @@ This project includes user registration, login, a product list, a shopping cart,
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
 6. **Checkout**: Proceed to checkout from the `/checkout` page.
 
+**Note**: The payment system is for demonstration purposes only. No real transactions will be processed.
+
 ## Project Structure
 
 ```
