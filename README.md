@@ -32,9 +32,11 @@ This project includes user registration, login, a product list, a shopping cart,
   - [Original Images](#original-images)
   - [Screenshots](#screenshots)
     - [Homepage / Record of the Week](#homepage--record-of-the-week)
+    - [Homepage / Hidden Trivia from AI Chatbot](#homepage--hidden-trivia-from-ai-chatbot)
     - [Admin - Set Record of the Week](#admin---set-record-of-the-week)
     - [Admin - Manage Products](#admin---manage-products)
     - [Product List](#product-list)
+    - [Product List - Card View](#product-list---card-view)
     - [Shopping Cart](#shopping-cart)
     - [Checkout](#checkout)
     - [MongoDB Compass - a\_records\_store\_db](#mongodb-compass---a_records_store_db)
@@ -53,7 +55,7 @@ This project includes user registration, login, a product list, a shopping cart,
 - Checkout process integrated with Stripe for payment processing
 - Flash messages for feedback
 - Responsive design with a clean UI
-- **New**: Fetch and display music trivia using the Hugging Face API
+- **New**: Fetch and display music trivia using the Ollama API
 
 ## Installation
 
@@ -95,8 +97,8 @@ This project includes user registration, login, a product list, a shopping cart,
     SECRET_KEY='a_secure_and_long_random_string'
     STRIPE_PUBLIC_KEY='your_stripe_public_key'
     STRIPE_SECRET_KEY='your_stripe_secret_key'
-    HUGGING_FACE_API_KEY='your_hugging_face_api_key'
-    HUGGING_FACE_API_URL='your_hugging_face_api_url'
+    OLLAMA_API_KEY='your_ollama_api_key'
+    OLLAMA_API_URL='http://localhost:11434/api/generate'
     ```
 
 6. **Run the application**:
@@ -115,7 +117,7 @@ This project includes user registration, login, a product list, a shopping cart,
 4. **Browse Products**: View available products on the `/product` page.
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
 6. **Checkout**: Proceed to checkout from the `/checkout` page.
-7. **Fetch Trivia**: Click on the secret icon next to "A's Spotlight" to fetch interesting trivia about the album of the week using the Hugging Face API.
+7. **Fetch Trivia**: Click on the secret icon next to "A's Spotlight" to fetch interesting trivia about the album of the week using the Ollama API.
 
 **Note**: The payment system is for demonstration purposes only. No real transactions will be processed.
 
@@ -310,6 +312,9 @@ The images `logo1.png`, `logo2.png`, and `IMG_1194_land.jpg` are original works 
 ### Homepage / Record of the Week
 ![Homepage](./application/static/image/screenshots/homepage.jpg)
 
+### Homepage / Hidden Trivia from AI Chatbot
+![Homepage](./application/static/image/screenshots/hidden_trivia.jpg)
+
 ### Admin - Set Record of the Week
 ![Admin - Set Record of the Week](./application/static/image/screenshots/admin_set_record_of_the_week.jpeg)
 
@@ -318,6 +323,9 @@ The images `logo1.png`, `logo2.png`, and `IMG_1194_land.jpg` are original works 
 
 ### Product List
 ![Product List](./application/static/image/screenshots/product_list.jpeg)
+
+### Product List - Card View
+![Product List](./application/static/image/screenshots/product_list_card_view.jpeg)
 
 ### Shopping Cart
 ![Shopping Cart](./application/static/image/screenshots/shopping_cart.jpeg)
