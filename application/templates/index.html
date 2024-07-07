@@ -6,17 +6,9 @@
   {% if featured_product %}
   <div class="featured-product">
     {% if featured_product.image_url %}
-    <img
-      src="{{ featured_product.image_url }}"
-      alt="{{ featured_product.title }}"
-      class="featured-image"
-    />
+    <img src="{{ featured_product.image_url }}" alt="{{ featured_product.title }}" class="featured-image"/>
     {% else %}
-    <img
-      src="{{ url_for('static', filename='image/placeholder.png') }}"
-      alt="{{ featured_product.title }}"
-      class="featured-image"
-    />
+    <img src="{{ url_for('static', filename='image/placeholder.png') }}" alt="{{ featured_product.title }}" class="featured-image"/>
     {% endif %}
     <div class="featured-details">
       <h3>{{ featured_product.title }}</h3>
@@ -25,28 +17,82 @@
       <p><strong>Price:</strong> ${{ featured_product.price }}</p>
     </div>
   </div>
-  <h3>🌟 A's Spotlight 🌟</h3>
+  <h3>
+    🌟 A's Spotlight 🌟
+    <span style="float: right;">
+      <i class="fa fa-user-secret fa-2x highlight-icon" id="trivia-icon" style="cursor: pointer;"></i>
+    </span>
+  </h3>
   <div class="featured-message">
-      {{ featured_product.message | safe }}
+    {{ featured_product.message | safe }}
+  </div>
+  <div class="trivia-section" id="trivia-section" style="display: none;"">
+    <div class="loader" id="loader" style="display: none;"></div>
+    <div id="trivia-result" class="trivia-result"></div>
   </div>
   {% else %}
   <p>No record selected for this week.</p>
   {% endif %}
-  
   <hr>
   <h2 class="title">Coming soon...</h2>
-  <ul class="coming-soon-list">
+  <div class="coming-soon-list">
     {% for product in coming_soon_products %}
-    <li>
-      <div class="coming-soon-product">
-        <div class="coming-soon-details">
-          <h4>{{ product.title }}</h4>
-          <p><strong>Artist:</strong> {{ product.artist }}</p>
-          <p><strong>Label:</strong> {{ product.label }}</p>
-        </div>
+    <div class="coming-soon-product card">
+      <div class="coming-soon-details">
+        <h4>{{ product.title }}</h4>
+        <hr>
+        <p><strong>Artist:</strong> {{ product.artist }}</p>
+        <p><strong>Label:</strong> {{ product.label }}</p>
       </div>
-    </li>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
 </div>
+<script>
+  let followUp = false;
+
+  document.getElementById('trivia-icon').addEventListener('click', function() {
+    const triviaSection = document.getElementById('trivia-section');
+    const loader = document.getElementById('loader');
+    const triviaResult = document.getElementById('trivia-result');
+
+    // Show the loader
+    loader.style.display = 'block';
+    triviaResult.innerText = ''; // Clear previous trivia
+    triviaSection.style.display = 'block'; // Ensure trivia section is visible
+
+    const subject = "{{ featured_product.title }}";
+    fetch('/get_trivia', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ subject: subject, follow_up: followUp })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Trivia Response:", data); // Debugging statement
+      document.getElementById('trivia-result').innerText = data.text || 'No trivia available at the moment.';
+      // Hide the loader
+      loader.style.display = 'none';
+      triviaSection.style.opacity = '0';
+
+      // Apply fade-in effect
+      setTimeout(() => { triviaSection.style.opacity = '1'; }, 50);
+
+      // Update the follow-up flag for subsequent requests
+      followUp = true;
+    })
+    .catch(error => {
+      console.error('Error fetching trivia:', error);
+      document.getElementById('trivia-result').innerText = 'Error fetching trivia. Please try again later.';
+      // Hide the loader
+      loader.style.display = 'none';
+      triviaSection.style.opacity = '0';
+
+      // Apply fade-in effect
+      setTimeout(() => { triviaSection.style.opacity = '1'; }, 50);
+    });
+  });
+</script>
 {% endblock %}

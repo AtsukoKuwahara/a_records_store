@@ -58,8 +58,8 @@
           <tr>
             <th>Title</th>
             <th>Artist</th>
-            <th class="price-column">Price</th>
-            <th class="qty-column">Qty</th>
+            <th>Price</th>
+            <th>Qty</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@
           <tr>
             <td>{{ item.r2.title }}</td>
             <td>{{ item.r2.artist }}</td>
-            <td class="price-column">${{ item.r2.price }}</td>
+            <td class="price-column">${{ "%.2f"|format(item.r2["price"]) }}</td>
             <td class="qty-column">{{ item.r1.quantity }}</td>
           </tr>
           {% endfor %}

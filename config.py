@@ -18,5 +18,12 @@ class Config(object):
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'image', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max file size: 16MB
 
+    # Hugging Face API settings
+    HUGGING_FACE_API_KEY = os.environ.get('HUGGING_FACE_API_KEY')
+    HUGGING_FACE_API_URL = os.environ.get('HUGGING_FACE_API_URL')
+    HUGGING_FACE_MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
+
+    OLLAMA_API_URL = 'http://localhost:11434/api/generate'
+
 # Print the secret key for verification during development
 print("SECRET_KEY:", Config.SECRET_KEY)

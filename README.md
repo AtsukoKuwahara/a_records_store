@@ -53,6 +53,7 @@ This project includes user registration, login, a product list, a shopping cart,
 - Checkout process integrated with Stripe for payment processing
 - Flash messages for feedback
 - Responsive design with a clean UI
+- **New**: Fetch and display music trivia using the Hugging Face API
 
 ## Installation
 
@@ -94,6 +95,8 @@ This project includes user registration, login, a product list, a shopping cart,
     SECRET_KEY='a_secure_and_long_random_string'
     STRIPE_PUBLIC_KEY='your_stripe_public_key'
     STRIPE_SECRET_KEY='your_stripe_secret_key'
+    HUGGING_FACE_API_KEY='your_hugging_face_api_key'
+    HUGGING_FACE_API_URL='your_hugging_face_api_url'
     ```
 
 6. **Run the application**:
@@ -112,6 +115,7 @@ This project includes user registration, login, a product list, a shopping cart,
 4. **Browse Products**: View available products on the `/product` page.
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
 6. **Checkout**: Proceed to checkout from the `/checkout` page.
+7. **Fetch Trivia**: Click on the secret icon next to "A's Spotlight" to fetch interesting trivia about the album of the week using the Hugging Face API.
 
 **Note**: The payment system is for demonstration purposes only. No real transactions will be processed.
 
@@ -176,6 +180,7 @@ a_records_store/
 - **POST /admin/manage_products**: Handles the addition, update, and deletion of products.
 - **GET /checkout**: Displays the checkout page.
 - **POST /checkout**: Handles the checkout process and integrates with Stripe for payment processing.
+- **POST /get_trivia**: Fetches trivia for the featured album using the Ollama API.
 
 ## Models
 

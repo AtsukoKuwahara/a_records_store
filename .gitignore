@@ -111,3 +111,6 @@ db.sqlite3
 
 # Mac OS artifacts
 .DS_Store
+
+# Ignore the file containing Flowise code
+flowise_routes.py

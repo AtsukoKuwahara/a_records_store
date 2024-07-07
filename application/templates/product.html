@@ -1,44 +1,76 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
+{% block content %}
 <div class="container">
   <h2 class="title">Product List</h2>
-  <table class="product-table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Label</th>
-        <th>Price</th>
-        <th>Buy</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for product in products %}
-      <tr>
-        <td>
-          <img
-            src="{{ product.image_url }}"
-            alt="{{ product.title }}"
-            class="product-image"
-          />
-        </td>
-        <td>{{ product.title }}</td>
-        <td>{{ product.artist }}</td>
-        <td>{{ product.label }}</td>
-        <td class="price-column">${{ "%.2f"|format(product.price) }}</td>
-        <td class="buy-column">
-          <form action="{{ url_for('order') }}" method="POST">
-            <input
-              type="hidden"
-              name="product_id"
-              value="{{ product.product_id }}"
-            />
-            <button type="submit" class="btn btn-table">Buy Now</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="view-toggle">
+    <button id="list-view" class="btn btn-secondary">List View</button>
+    <button id="card-view" class="btn btn-secondary">Card View</button>
+  </div>
+  
+  <!-- List (Table) View -->
+  <div id="product-list-view">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Artist</th>
+          <th>Label</th>
+          <th>Price</th>
+          <th>Buy</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>
+            <img src="{{ product.image_url }}" alt="{{ product.title }}" class="product-image" />
+          </td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.artist }}</td>
+          <td>{{ product.label }}</td>
+          <td class="price-column">${{ "%.2f"|format(product.price) }}</td>
+          <td class="buy-column">
+            <form action="{{ url_for('order') }}" method="POST">
+              <input type="hidden" name="product_id" value="{{ product.product_id }}" />
+              <button type="submit" class="btn btn-table">Buy Now</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Card View -->
+  <div id="product-card-view" class="product-list" style="display: none;">
+    {% for product in products %}
+    <div class="product-item card">
+      <img src="{{ product.image_url }}" alt="{{ product.title }}" class="product-image"/>
+      <div class="product-details">
+        <h3>{{ product.title }}</h3>
+        <p><strong>Artist:</strong> {{ product.artist }}</p>
+        <p><strong>Label:</strong> {{ product.label }}</p>
+        <p><strong>Price:</strong> ${{ "%.2f"|format(product.price) }}</p>
+        <form action="{{ url_for('order') }}" method="POST">
+          <input type="hidden" name="product_id" value="{{ product.product_id }}"/>
+          <button type="submit" class="btn btn-table">Buy Now</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
+
+<script>
+  document.getElementById('list-view').addEventListener('click', function() {
+    document.getElementById('product-list-view').style.display = 'block';
+    document.getElementById('product-card-view').style.display = 'none';
+  });
+
+  document.getElementById('card-view').addEventListener('click', function() {
+    document.getElementById('product-list-view').style.display = 'none';
+    document.getElementById('product-card-view').style.display = 'flex';
+  });
+</script>
 {% endblock %}
