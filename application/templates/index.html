@@ -19,10 +19,11 @@
   </div>
   <h3>
     🌟 A's Spotlight 🌟
-    <span style="float: right;">
-      <i class="fa fa-user-secret fa-2x highlight-icon" id="trivia-icon" style="cursor: pointer;"></i>
+    <span style="float: right; position: relative;">
+      <i class="fa fa-user-secret fa-2x highlight-icon" id="trivia-icon"></i>
+      <span class="tooltip-text">Get Trivia</span>
     </span>
-  </h3>
+  </h3>  
   <div class="featured-message">
     {{ featured_product.message | safe }}
   </div>
@@ -37,7 +38,7 @@
   <h2 class="title">Coming soon...</h2>
   <div class="coming-soon-list">
     {% for product in coming_soon_products %}
-    <div class="coming-soon-product card">
+    <div class="card coming-soon-product">
       <div class="coming-soon-details">
         <h4>{{ product.title }}</h4>
         <hr>

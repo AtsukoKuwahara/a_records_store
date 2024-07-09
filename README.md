@@ -9,6 +9,7 @@ This project includes user registration, login, a product list, a shopping cart,
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
+    - [Optional: Create a Customized Llama3 Model](#optional-create-a-customized-llama3-model)
   - [Usage](#usage)
   - [Project Structure](#project-structure)
   - [Routes](#routes)
@@ -89,7 +90,46 @@ This project includes user registration, login, a product list, a shopping cart,
 
     - Create Database and Collections: Use MongoDB Compass or the MongoDB shell to create a new database named `a_records_store_db` and collections named `product`. (`user`, `order`, and `record_of_the_week` will be automatically created by operations on the webpage.)
 
-5. **Set environment variables**:
+5. **Install and set up Ollama**:
+    - Download and install Ollama from the official website: [Ollama](https://ollama.com/download)
+    - Follow the installation instructions provided on the website.
+    - Start the Ollama API server:
+    ```sh
+    ollama serve
+    ```
+
+### Optional: Create a Customized Llama3 Model
+
+   1. **Set the system instructions**:
+       ```sh
+       ollama run llama3
+       >>> /set system "You are a music expert known for providing rare, interesting and verifiable trivia facts about albums. Always finish your thoughts and provide full context. Ensure each response is unique and covers different aspects of the album."
+       >>> /show system
+       ```
+   2. **Set Parameters for Faster Responses**:
+    ```sh
+    (Sample:)
+    >>> /set parameter temperature 0.7
+    >>> /set parameter num_predict 100
+    >>> /set parameter top_k 50
+    >>> /set parameter top_p 0.9
+    >>> /set parameter num_gpu 1
+    >>> /set parameter repeat_penalty 1.2
+    >>> /set parameter repeat_last_n 64
+    ```
+
+   3. **Save the customized model**:
+       ```sh
+       >>> /save grooveguru
+       Created new model 'grooveguru'
+       ```
+
+   4. **Run the customized model**:
+       ```sh
+       ollama run grooveguru
+       ```
+
+6. **Set environment variables**:
     Create a `.flaskenv` file in the root directory with the following content:
     ```
     FLASK_ENV=development
@@ -97,13 +137,18 @@ This project includes user registration, login, a product list, a shopping cart,
     SECRET_KEY='a_secure_and_long_random_string'
     STRIPE_PUBLIC_KEY='your_stripe_public_key'
     STRIPE_SECRET_KEY='your_stripe_secret_key'
-    OLLAMA_API_KEY='your_ollama_api_key'
-    OLLAMA_API_URL='http://localhost:11434/api/generate'
     ```
 
-6. **Run the application**:
+7. **Run the application**:
     ```sh
     flask run
+    ```
+
+8. **Customizing the Trivia Model**:
+    - By default, the application uses the `llama3` model for trivia.
+    - If you have created a custom model (e.g., `grooveguru`), update the route in `routes.py` to use your custom model:
+    ```python
+    model = 'grooveguru'  # Change to your custom model name
     ```
 
 ## Usage
@@ -310,10 +355,10 @@ The images `logo1.png`, `logo2.png`, and `IMG_1194_land.jpg` are original works 
 ## Screenshots
 
 ### Homepage / Record of the Week
-![Homepage](./application/static/image/screenshots/homepage.jpg)
+![Homepage](./application/static/image/screenshots/homepage.jpeg)
 
 ### Homepage / Hidden Trivia from AI Chatbot
-![Homepage](./application/static/image/screenshots/hidden_trivia.jpg)
+![Homepage](./application/static/image/screenshots/hidden_trivia.jpeg)
 
 ### Admin - Set Record of the Week
 ![Admin - Set Record of the Week](./application/static/image/screenshots/admin_set_record_of_the_week.jpeg)

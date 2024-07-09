@@ -25,7 +25,7 @@
         <td>{{ order.r2["label"] }}</td>
         <td class="price-column">${{ "%.2f"|format(order.r2["price"]) }}</td>
         <td class="qty-column">{{ order.r1["quantity"] }}</td>
-        <td>
+        <td class="option-column">
           <form action="{{ url_for('order') }}" method="POST">
             <input
               type="hidden"

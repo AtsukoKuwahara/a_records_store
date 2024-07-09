@@ -368,50 +368,44 @@ def checkout():
     
     return render_template('checkout.html', key=app.config['STRIPE_PUBLIC_KEY'], orders=orders, subtotal=subtotal)
 
-# Ollama: Llama 3
+# Using Ollama: GrooveGuru (Customized Llama3) or Llama3 model
 @app.route('/get_trivia', methods=['POST'])
 def get_trivia():
     data = request.json
     subject = data.get('subject', '')
     follow_up = data.get('follow_up', False)
     
+    # Change the model name here if you have created a custom model
+    model = 'llama3'  # or 'grooveguru'
+
     if follow_up:
         question = f'Tell me another rare, interesting trivia fact about the album "{subject}".'
     else:
-        question = f'Tell me a rare, interesting trivia fact about the album "{subject}" as a music expert.'
+        question = f'Tell me a rare, interesting trivia fact about the album "{subject}".'
 
-    response = get_ollama_response(question)
+    response = get_ollama_response(question, model)
     return jsonify(response)
 
-def get_ollama_response(question):
+def get_ollama_response(question, model):
     payload = {
-        "model": "llama3",
-        "prompt": question
+        "model": model,
+        "prompt": question,
+        "stream": False
     }
     headers = {
         'Content-Type': 'application/json'
     }
-    response = requests.post(OLLAMA_API_URL, json=payload, headers=headers)
+    response = requests.post(app.config['OLLAMA_API_URL'], json=payload, headers=headers)
     
     # Print the raw response for debugging
-    # print("Raw response content:", response.content)
+    #print("Raw response content:", response.content)
 
-    # Initialize an empty string to hold the complete response
-    full_response = ""
-
-    # Read the response line by line
-    for line in response.iter_lines():
-        if line:
-            try:
-                # Decode each line from bytes to a string
-                json_line = line.decode('utf-8')
-                # Parse each line as a JSON object
-                json_data = json.loads(json_line)
-                
-                # Append the 'response' field to the full response
-                full_response += json_data.get('response', '')
-            except ValueError as e:
-                print("Error parsing line:", e)
-                return {'text': 'Error fetching trivia. Please try again later.'}
+    # Directly parse the JSON response
+    try:
+        json_data = response.json()
+        full_response = json_data.get('response', 'No trivia available at the moment.')
+    except ValueError as e:
+        print("Error parsing JSON:", e)
+        return {'text': 'Error fetching trivia. Please try again later.'}
     
     return {'text': full_response}
