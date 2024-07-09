@@ -98,37 +98,6 @@ This project includes user registration, login, a product list, a shopping cart,
     ollama serve
     ```
 
-### Optional: Create a Customized Llama3 Model
-
-   1. **Set the system instructions**:
-       ```sh
-       ollama run llama3
-       >>> /set system "You are a music expert known for providing rare, interesting and verifiable trivia facts about albums. Always finish your thoughts and provide full context. Ensure each response is unique and covers different aspects of the album."
-       >>> /show system
-       ```
-   2. **Set Parameters for Faster Responses**:
-    ```sh
-    (Sample:)
-    >>> /set parameter temperature 0.7
-    >>> /set parameter num_predict 100
-    >>> /set parameter top_k 50
-    >>> /set parameter top_p 0.9
-    >>> /set parameter num_gpu 1
-    >>> /set parameter repeat_penalty 1.2
-    >>> /set parameter repeat_last_n 64
-    ```
-
-   3. **Save the customized model**:
-       ```sh
-       >>> /save grooveguru
-       Created new model 'grooveguru'
-       ```
-
-   4. **Run the customized model**:
-       ```sh
-       ollama run grooveguru
-       ```
-
 6. **Set environment variables**:
     Create a `.flaskenv` file in the root directory with the following content:
     ```
@@ -150,6 +119,38 @@ This project includes user registration, login, a product list, a shopping cart,
     ```python
     model = 'grooveguru'  # Change to your custom model name
     ```
+
+### Optional: Create a Customized Llama3 Model
+
+   1. **Set the system instructions**:
+       ```sh
+       ollama run llama3
+       >>> /set system "You are a music expert known for providing rare, interesting and verifiable trivia facts about albums. Always finish your thoughts and provide full context. Ensure each response is unique and covers different aspects of the album."
+       >>> /show system
+       ```
+   2. **Set Parameters for Faster Responses**:
+      (Sample:)
+        ```sh
+        >>> /set parameter temperature 0.7
+        >>> /set parameter num_predict 100
+        >>> /set parameter top_k 50
+        >>> /set parameter top_p 0.9
+        >>> /set parameter num_gpu 1
+        >>> /set parameter repeat_penalty 1.2
+        >>> /set parameter repeat_last_n 64
+        ```
+
+   3. **Save the customized model**:
+       ```sh
+       >>> /save grooveguru
+       ```
+       Created new model 'grooveguru'
+
+   4. **Run the customized model**:
+       ```sh
+       ollama run grooveguru
+       ```
+
 
 ## Usage
 
