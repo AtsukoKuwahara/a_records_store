@@ -13,6 +13,7 @@
               <li><a href="{{ url_for('index') }}">Home</a></li>
               <li><a href="{{ url_for('product') }}">Product List</a></li>
               <li><a href="{{ url_for('order') }}">Shopping Cart</a></li>
+              <li><a href="{{ url_for('archives') }}">Archives</a></li>
               {% if not session.get('username') %}
               <li><a href="{{ url_for('register') }}">Register</a></li>
               <li><a href="{{ url_for('login') }}">Login</a></li>

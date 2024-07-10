@@ -64,12 +64,13 @@
 
     const album = "{{ featured_product.title }}";
     const artist = "{{ featured_product.artist }}";
+    const productId = "{{ featured_product.product_id }}";
     fetch('/get_trivia', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ album: album, artist: artist, follow_up: followUp })
+      body: JSON.stringify({ album: album, artist: artist, follow_up: followUp, product_id: productId })
     })
     .then(response => response.json())
     .then(data => {

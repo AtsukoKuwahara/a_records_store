@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title">Trivia Archives</h2>
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search by title or artist...">
+  </div>
+  <div class="archives-container">
+    <!-- Left side: List of trivia entries -->
+    <div class="archives-list">
+      {% for trivia in trivias %}
+      <div class="coming-soon-product card trivia-entry" data-id="{{ trivia.id }}">
+        <div class="coming-soon-details">
+          <h4>{{ trivia.title }}</h4>
+          <hr>
+          <p class="artist"><strong>Artist:</strong> {{ trivia.artist }}</p>
+          <p class="date"><strong>Date:</strong> {{ trivia.created_at.strftime('%Y-%m-%d') }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Right side: Display details of the selected trivia -->
+    <div class="archives-details" id="trivia-details">
+      <div id="trivia-content">
+        <p>Select a trivia entry to view details.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // JavaScript to handle card click and fetch details
+  document.querySelectorAll('.trivia-entry').forEach(card => {
+    card.addEventListener('click', function() {
+      const triviaId = this.getAttribute('data-id');
+
+      fetch(`/get_trivia_details/${triviaId}`)
+        .then(response => response.json())
+        .then(data => {
+          const triviaContent = `
+            <h3>${data.title} by ${data.artist}</h3>
+            <p><strong>Message:</strong> ${data.message}</p>
+            <p><strong>Trivia:</strong> ${data.trivia}</p>
+            <p><strong>Date:</strong> ${data.created_at}</p>
+          `;
+          document.getElementById('trivia-content').innerHTML = triviaContent;
+
+          // Highlight the selected trivia entry
+          document.querySelectorAll('.trivia-entry').forEach(entry => entry.classList.remove('selected'));
+          card.classList.add('selected');
+        })
+        .catch(error => console.error('Error fetching trivia details:', error));
+    });
+  });
+
+  // JavaScript to handle search functionality
+  document.getElementById('search-input').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    document.querySelectorAll('.trivia-entry').forEach(card => {
+      const title = card.querySelector('h4').innerText.toLowerCase();
+      const artist = card.querySelector('.artist').innerText.toLowerCase();
+      if (title.includes(filter) || artist.includes(filter)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+{% endblock %}

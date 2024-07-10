@@ -18,6 +18,7 @@ This project includes user registration, login, a product list, a shopping cart,
     - [Product](#product)
     - [RecordOfTheWeek](#recordoftheweek)
     - [Order](#order)
+    - [TriviaArchive](#triviaarchive)
   - [Forms](#forms)
     - [LoginForm](#loginform)
     - [RegisterForm](#registerform)
@@ -40,6 +41,7 @@ This project includes user registration, login, a product list, a shopping cart,
     - [Product List - Card View](#product-list---card-view)
     - [Shopping Cart](#shopping-cart)
     - [Checkout](#checkout)
+    - [Archives](#archives)
     - [MongoDB Compass - a\_records\_store\_db](#mongodb-compass---a_records_store_db)
     - [MongoDB Compass - Products Collection](#mongodb-compass---products-collection)
 
@@ -57,6 +59,7 @@ This project includes user registration, login, a product list, a shopping cart,
 - Flash messages for feedback
 - Responsive design with a clean UI
 - **New**: Fetch and display music trivia using the Ollama API
+- **New**: Archives page to display previously fetched trivia
 
 ## Installation
 
@@ -88,7 +91,7 @@ This project includes user registration, login, a product list, a shopping cart,
     brew services start mongodb-community@5.0
     ```
 
-    - Create Database and Collections: Use MongoDB Compass or the MongoDB shell to create a new database named `a_records_store_db` and collections named `product`. (`user`, `order`, and `record_of_the_week` will be automatically created by operations on the webpage.)
+    - Create Database and Collections: Use MongoDB Compass or the MongoDB shell to create a new database named `a_records_store_db` and collections named `product`. (`user`, `order`, `record_of_the_week` and `trivia_archive` will be automatically created by operations on the webpage.)
 
 5. **Install and set up Ollama**:
     - Download and install Ollama from the official website: [Ollama](https://ollama.com/download)
@@ -125,7 +128,7 @@ This project includes user registration, login, a product list, a shopping cart,
    1. **Set the system instructions**:
        ```sh
        ollama run llama3
-       >>> /set system "You are a renowned music expert specializing in providing rare, interesting, and verifiable trivia about music albums. Always provide detailed and accurate information, ensuring each response is unique and covers different aspects of the album, such as production details, album art, hidden messages, or cultural impact."
+       >>> /set system "You are a renowned music expert specializing in providing rare, interesting, and verifiable trivia about music albums. Always provide detailed and accurate information, ensuring each response is unique and covers different aspects of the album, such as production details, album art, hidden messages, or cultural impact. If you don't have any trivia or story about the album, please provide something related to the artist. If you don't have anything at all, just say that you don't know."
        >>> /show system
        ```
    2. **Set Parameters for Faster Responses**:
@@ -163,6 +166,7 @@ This project includes user registration, login, a product list, a shopping cart,
 5. **Shopping Cart**: Add products to the shopping cart and manage orders on the `/order` page.
 6. **Checkout**: Proceed to checkout from the `/checkout` page.
 7. **Fetch Trivia**: Click on the secret icon next to "A's Spotlight" to fetch interesting trivia about the album of the week using the Ollama API.
+8. **View Trivia Archives**: Navigate to `/archives` to view previously fetched trivia.
 
 **Note**: The payment system is for demonstration purposes only. No real transactions will be processed.
 
@@ -205,6 +209,7 @@ a_records_store/
 │       ├── product.html
 │       ├── order.html
 │       ├── checkout.html
+│       ├── archives.html
 │       └── layout.html
 └── data/
     ├── products.json
@@ -228,6 +233,7 @@ a_records_store/
 - **GET /checkout**: Displays the checkout page.
 - **POST /checkout**: Handles the checkout process and integrates with Stripe for payment processing.
 - **POST /get_trivia**: Fetches trivia for the featured album using the Ollama API.
+- **GET /archives**: Displays the archived trivia entries.
 
 ## Models
 
@@ -270,6 +276,17 @@ Represents an order placed by a user.
 - `product_id`: Identifier of the ordered product.
 - `quantity`: Quantity of the product ordered.
 - `is_order`: Boolean indicating whether the order is placed or not.
+
+### TriviaArchive
+
+Represents an archived trivia entry.
+
+- `product_id`: Identifier of the product associated with the trivia.
+- `title`: Title of the album.
+- `artist`: Artist of the album.
+- `trivia`: Trivia text.
+- `message`: Message from the admin about the record of the week.
+- `created_at`: Timestamp when the trivia was created (defaults to the current time).
 
 ## Forms
 
@@ -342,6 +359,7 @@ Used for the checkout process.
 - `product.html`: Product listing page.
 - `order.html`: Shopping cart and order page.
 - `checkout.html`: Checkout page.
+- `archives.html`: Archives page displaying previously fetched trivia.
 - `layout.html`: Base layout for the application.
 
 ## License
@@ -377,6 +395,9 @@ The images `logo1.png`, `logo2.png`, and `IMG_1194_land.jpg` are original works 
 
 ### Checkout
 ![Checkout](./application/static/image/screenshots/checkout.jpeg)
+
+### Archives
+![Archives](./application/static/image/screenshots/archives.jpeg)
 
 ### MongoDB Compass - a_records_store_db
 ![MongoDB Compass - Products Collection](./application/static/image/screenshots/mongodb_compass.jpeg)

@@ -2,7 +2,7 @@ import os
 from werkzeug.utils import secure_filename
 
 from flask import render_template, redirect, url_for, jsonify, request, session, flash
-from .model import Product, User, Order, RecordOfTheWeek
+from .model import Product, User, Order, RecordOfTheWeek, TriviaArchive
 from . import app, api
 from .forms import LoginForm, RegisterForm
 from flask_restx import Resource
@@ -369,8 +369,6 @@ def checkout():
     
     return render_template('checkout.html', key=app.config['STRIPE_PUBLIC_KEY'], orders=orders, subtotal=subtotal)
 
-import html
-
 # Using Ollama: GrooveGuru (Customized Llama3) or Llama3 model
 @app.route('/get_trivia', methods=['POST'])
 def get_trivia():
@@ -378,9 +376,20 @@ def get_trivia():
     album = html.unescape(data.get('album', ''))
     artist = html.unescape(data.get('artist', ''))
     follow_up = data.get('follow_up', False)
+    product_id = data.get('product_id', 0)
+    
+    # Log the received data for debugging
+    print(f"Received Data: {data}")
+
+    # Fetch the RecordOfTheWeek message
+    record_of_the_week = RecordOfTheWeek.objects(product_id=product_id).first()
+    message = record_of_the_week.message if record_of_the_week else ''
+
+    # Log the fetched message for debugging
+    print(f"Fetched Message: {message}")
     
     # Change the model name here if you have created a custom model
-    model = 'llama3'  # or 'grooveguru'
+    model = 'grooveguru'  # or 'llama3'
 
     if follow_up:
         question = f'Tell me another rare, interesting trivia fact about the album "{album}" by "{artist}".'
@@ -388,6 +397,18 @@ def get_trivia():
         question = f'Tell me a rare, interesting trivia fact about the album "{album}" by "{artist}".'
 
     response = get_ollama_response(question, model)
+
+    # Save the trivia to the archive
+    if response['text']:
+        trivia = TriviaArchive(
+            product_id=product_id,
+            title=album,
+            artist=artist,
+            trivia=response['text'],
+            message=message  # Save the fetched message
+        )
+        trivia.save()
+    
     return jsonify(response)
 
 def get_ollama_response(question, model):
@@ -402,8 +423,8 @@ def get_ollama_response(question, model):
     response = requests.post(app.config['OLLAMA_API_URL'], json=payload, headers=headers)
     
     # Print the raw response for debugging
-    print("question:", question)
-    print("Raw response content:", response.content)
+    # print("question:", question)
+    # print("Raw response content:", response.content)
 
     # Directly parse the JSON response
     try:
@@ -414,3 +435,23 @@ def get_ollama_response(question, model):
         return {'text': 'Error fetching trivia. Please try again later.'}
     
     return {'text': full_response}
+
+@app.route('/archives')
+def archives():
+    trivias = TriviaArchive.objects().order_by('-created_at')
+    return render_template('archives.html', trivias=trivias)
+
+@app.route('/get_trivia_details/<trivia_id>')
+def get_trivia_details(trivia_id):
+    trivia = TriviaArchive.objects(id=trivia_id).first()
+    if trivia:
+        trivia_data = {
+            "title": trivia.title,
+            "artist": trivia.artist,
+            "trivia": trivia.trivia,
+            "message": trivia.message,
+            "created_at": trivia.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
+        return jsonify(trivia_data)
+    else:
+        return jsonify({"error": "Trivia not found"}), 404

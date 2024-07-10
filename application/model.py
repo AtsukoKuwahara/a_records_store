@@ -48,3 +48,11 @@ class Order(db.Document):
     product_id  = db.IntField()
     quantity    = db.IntField()
     is_order    = db.BooleanField()
+
+class TriviaArchive(db.Document):
+    product_id  = db.IntField()
+    title       = db.StringField(max_length=200)
+    artist      = db.StringField(max_length=200)
+    trivia      = db.StringField(max_length=2000)
+    created_at  = db.DateTimeField(default=datetime.datetime.utcnow)
+    message     = db.StringField(max_length=2000)  # Message from the record of the week
