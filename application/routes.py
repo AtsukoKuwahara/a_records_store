@@ -11,6 +11,7 @@ import json
 import stripe
 import datetime
 import requests
+import html
 
 # Define allowed extensions for file uploads
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -368,20 +369,23 @@ def checkout():
     
     return render_template('checkout.html', key=app.config['STRIPE_PUBLIC_KEY'], orders=orders, subtotal=subtotal)
 
+import html
+
 # Using Ollama: GrooveGuru (Customized Llama3) or Llama3 model
 @app.route('/get_trivia', methods=['POST'])
 def get_trivia():
     data = request.json
-    subject = data.get('subject', '')
+    album = html.unescape(data.get('album', ''))
+    artist = html.unescape(data.get('artist', ''))
     follow_up = data.get('follow_up', False)
     
     # Change the model name here if you have created a custom model
     model = 'llama3'  # or 'grooveguru'
 
     if follow_up:
-        question = f'Tell me another rare, interesting trivia fact about the album "{subject}".'
+        question = f'Tell me another rare, interesting trivia fact about the album "{album}" by "{artist}".'
     else:
-        question = f'Tell me a rare, interesting trivia fact about the album "{subject}".'
+        question = f'Tell me a rare, interesting trivia fact about the album "{album}" by "{artist}".'
 
     response = get_ollama_response(question, model)
     return jsonify(response)
@@ -398,7 +402,8 @@ def get_ollama_response(question, model):
     response = requests.post(app.config['OLLAMA_API_URL'], json=payload, headers=headers)
     
     # Print the raw response for debugging
-    #print("Raw response content:", response.content)
+    print("question:", question)
+    print("Raw response content:", response.content)
 
     # Directly parse the JSON response
     try:

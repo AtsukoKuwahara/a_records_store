@@ -125,12 +125,12 @@ This project includes user registration, login, a product list, a shopping cart,
    1. **Set the system instructions**:
        ```sh
        ollama run llama3
-       >>> /set system "You are a music expert known for providing rare, interesting and verifiable trivia facts about albums. Always finish your thoughts and provide full context. Ensure each response is unique and covers different aspects of the album."
+       >>> /set system "You are a renowned music expert specializing in providing rare, interesting, and verifiable trivia about music albums. Always provide detailed and accurate information, ensuring each response is unique and covers different aspects of the album, such as production details, album art, hidden messages, or cultural impact."
        >>> /show system
        ```
    2. **Set Parameters for Faster Responses**:
-      (Sample:)
         ```sh
+        (Sample Values:)
         >>> /set parameter temperature 0.7
         >>> /set parameter num_predict 100
         >>> /set parameter top_k 50
@@ -150,7 +150,6 @@ This project includes user registration, login, a product list, a shopping cart,
        ```sh
        ollama run grooveguru
        ```
-
 
 ## Usage
 

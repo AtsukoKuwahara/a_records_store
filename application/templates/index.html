@@ -62,13 +62,14 @@
     triviaResult.innerText = ''; // Clear previous trivia
     triviaSection.style.display = 'block'; // Ensure trivia section is visible
 
-    const subject = "{{ featured_product.title }}";
+    const album = "{{ featured_product.title }}";
+    const artist = "{{ featured_product.artist }}";
     fetch('/get_trivia', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ subject: subject, follow_up: followUp })
+      body: JSON.stringify({ album: album, artist: artist, follow_up: followUp })
     })
     .then(response => response.json())
     .then(data => {
@@ -94,6 +95,6 @@
       // Apply fade-in effect
       setTimeout(() => { triviaSection.style.opacity = '1'; }, 50);
     });
-  });
+});
 </script>
 {% endblock %}
